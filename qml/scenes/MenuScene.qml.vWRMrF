@@ -1,0 +1,50 @@
+import Felgo 3.0
+import QtQuick 2.0
+import "../common"
+
+SceneBase {
+    id: menuScene
+
+    // signal indicating that the selectLevelScene should be displayed
+    signal selectLevelPressed
+    signal levelPressed(string selectedLevel)
+
+    // background
+    Image {
+        id: menubg
+        anchors.fill: parent
+        source : "../../BackGroundImages/MenuBG"
+    }
+
+    // the "logo"
+    Text {
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 75
+        font.pixelSize: 25
+        color: "White"
+        text: "Welcome"
+    }
+    // menu
+    Column {
+        anchors.centerIn: parent
+        spacing: 10
+        StyledButton {
+            text: "Start"
+            textColor: white
+            color: "Coral"
+            radius: 10
+            onClicked: selectLevelPressed()
+        }
+        MenuButton {
+            text: "Exit"
+            color: "Coral"
+            onClicked: Qt.quit()
+        }
+    }
+    BackgroundMusic {
+    id: mainmusic
+    source: "../../Sounds/ABC.mp3"
+    volume: 0
+    }
+    onSelectLevelPressed: mainmusic.pause()
+}
